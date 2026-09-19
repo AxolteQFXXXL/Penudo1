@@ -2,7 +2,6 @@ package src2.Concurrente;
 
 import java.util.concurrent.ExecutionException;
 
-import tests.jerarquicas.catedraAG.testArbolGen;
 
 public class PC_TP1_2{
 

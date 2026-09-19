@@ -4,7 +4,7 @@
  Miriuka Matias, legajo FAI-5420
  Roca Jalil Yazmin, legajo FAI-5262
  */
-package src2.Concurrente.dinamicas;
+package src.Concurrente.dinamicas;
 
 public class Cola {
 

@@ -1,4 +1,4 @@
-package src2.Concurrente;
+package src.Concurrente;
 
 import java.util.Random;
 import java.util.Timer;
@@ -7,7 +7,7 @@ public class PC_TP2_7 {
     private static int contador = 500;
 
     /*clase de auto que utiliza runnable para convertirse en hilo */
-     private static class Auto implements Runnable{ 
+     private static class Auto implements Runnable{
         Random ran = new Random();
         private Planificador sup;
         private String patente;
@@ -28,7 +28,7 @@ public class PC_TP2_7 {
             this.marca=marca;
             this.km_record=km;
             this.gas=maxGas;
-        
+
         }
 
         @Override
@@ -50,14 +50,14 @@ public class PC_TP2_7 {
             finally{
                 System.out.println(this.modelo+" se ha apagado");
             }
-            
+
         }
 
         public void addGas(byte num){ this.gas+=num;}
 
         /* avanzar requiere aumentar el kilometraje con los km recorridos
         y luego vaciar su respectiva cant de combustible */
-        public void avanzar(int val){ 
+        public void avanzar(int val){
             this.km_record += val;
             this.gas -= 7;
             System.out.println(this.modelo+" esta avanzando "+val+"km");
@@ -67,7 +67,7 @@ public class PC_TP2_7 {
         public byte getGas(){return this.gas;}
         public String getModelo(){return this.modelo;}
 
-         
+
     }
 
     private static class Surtidor{
@@ -88,9 +88,9 @@ public class PC_TP2_7 {
             System.out.println("Surtidor a llenado: "+aLlenar+"L de gasolina para: "+Thread.currentThread().getName()+"\n le quedan: "+this.litrosTotal);
             }else{
                 enServicio = false;
-                System.out.println("Surtidor no puede abastecer el auto: "+Thread.currentThread().getName()); 
+                System.out.println("Surtidor no puede abastecer el auto: "+Thread.currentThread().getName());
             }
-            
+
             Thread.sleep(200);
         }
 
@@ -168,10 +168,10 @@ public class PC_TP2_7 {
 
         for(byte a = 0; a<5; a++) hilos[a] = new Thread(autos[a], autos[a].getModelo());
         hilos[5] = new Thread(camion, "camionKun");
-        
+
         for(byte a = 0; a<6; a++) hilos[a].start();
         temp.start();
-        
+
         System.out.println("termina main.");
 
     }

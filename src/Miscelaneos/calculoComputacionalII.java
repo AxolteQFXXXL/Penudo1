@@ -1,4 +1,4 @@
-package src2.Miscelaneos;
+package src.Miscelaneos;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

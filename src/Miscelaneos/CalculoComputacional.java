@@ -1,4 +1,4 @@
-package src2.Miscelaneos;
+package src.Miscelaneos;
 
 public class CalculoComputacional {
     

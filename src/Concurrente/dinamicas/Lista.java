@@ -1,4 +1,4 @@
-package src2.Concurrente.dinamicas;
+package src.Concurrente.dinamicas;
 
 public class Lista {
 

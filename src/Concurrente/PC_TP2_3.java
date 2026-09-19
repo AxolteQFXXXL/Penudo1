@@ -1,4 +1,4 @@
-package src2.Concurrente;
+package src.Concurrente;
 
 public class PC_TP2_3 {
     class Jaula{
