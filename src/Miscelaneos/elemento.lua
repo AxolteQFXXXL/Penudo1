@@ -1,0 +1,1 @@
+-- Clase de algo general, no se
