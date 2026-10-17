@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 
 public class calculoComputacionalII {
-    
+
     void main(){
         double[][]  matriz= new double[9][9];
         //{{2, 2.5, 3, 3.5, 4},{-0.2239, -0.484, -0.2601, -0.3801, -0.387}};
@@ -51,6 +51,6 @@ public class calculoComputacionalII {
             i++;
         }
         pos[0]++;
-        pos[1]++;   
+        pos[1]++;
     }
 }

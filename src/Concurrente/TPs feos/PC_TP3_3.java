@@ -6,7 +6,7 @@ public class PC_TP3_3 {
     void main(){
         Impresora impresora = new Impresora();
         ProcessoTal[] procesos = new ProcessoTal[3];
-        procesos[0]= new ProcessoTal("Quiero hacerlo ", impresora, (short) 1);
+        procesos[0]= new ProcessoTal("Quiero hacerlo ", impresora, (short) 1); 
         procesos[1] = new ProcessoTal("con el chico lindo ", impresora, (short) 2);
         procesos[2] = new ProcessoTal("llamado Axel", impresora, (short) 3);
         Thread [] hilos = new Thread[3];
