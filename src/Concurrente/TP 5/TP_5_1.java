@@ -57,6 +57,7 @@ void main(){
     }
     for(a=0; a<hilos.length; a++) hilos[a].start();
 
+
     System.out.println("termina main.");
 
 
