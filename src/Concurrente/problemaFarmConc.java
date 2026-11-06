@@ -28,12 +28,12 @@ public class problemaFarmConc {
         }
 
         for(a=0; a<auxiliar.length; a++){
-            auxiliar[a] = new AuxiliarFarmacia(farmacia, cantMedicos);
+            contable[a] = new AuxiliarContable(farmacia);
             hilosE[a] = new Thread(contable[a], "contable "+a);
         }
 
         for(a=0; a<auxiliar.length; a++){
-            auxiliar[a] = new AuxiliarFarmacia(farmacia, cantMedicos);
+            encargado[a] = new EncargadoGeneral(farmacia);
             hilosC[a] = new Thread(encargado[a], "encargado "+a);
         }
 
@@ -91,13 +91,15 @@ public class problemaFarmConc {
 
                 fichasGeneral[topeG] =ficha;
                 topeG++;
-                vacios.signal();
+                vacios.signalAll();
                 
             }catch(InterruptedException e ){e.printStackTrace();}
             finally{
+                
                 contador--;
                 if(this.contador==0) this.continuar=false;
                 pilaCanasta.unlock();
+                //System.out.println(Thread.currentThread().getName()+" libera el lock de canastaG. y continuar ="+this.continuar);
             }
 
         }
@@ -106,26 +108,27 @@ public class problemaFarmConc {
             pilaCanasta.lock();
             
             try{
-                while(topeG==0 || topeC==0) vacios.await();
+                //System.out.println(Thread.currentThread().getName()+" espera que alguna canasta este llena.");
+                while(topeG==0 && topeC==0) vacios.await();
 
-                System.out.println(Thread.currentThread().getName()+" logro entrar a las canastas.");
+                //System.out.println(Thread.currentThread().getName()+" logro entrar a las canastas.");
                 if(topeG>0){ //espera a que canasta tenga un elemento
+                    topeG--;
                     susImportes[fichasGeneral[topeG].getNumColegiala()]+=fichasGeneral[topeG].getImporte(); 
-
+                    
                     while(topeE>=maxE) canEnVacia.await();  //espera a que encargado tenga espacio
                     fichasEncargado[topeE]=fichasGeneral[topeG];
                     topeE++;
                     vacios.signalAll();
                     
                     fichasGeneral[topeG]=null;
-                    topeG--;
                     canastaGVacia.signalAll();  //le permitimos a auxiliar poner mas cosas en general
                 }
 
                 if(topeC>0){
+                    topeC--;
                     susImportes[fichasContable[topeC].getNumColegiala()]=fichasContable[topeC].getImporte();
                     fichasContable[topeC] = null;
-                    topeC--;
 
                     canConVacia.signalAll();
                 }
@@ -142,10 +145,12 @@ public class problemaFarmConc {
             try{
                 
                 //espera a que general este con un elemento
-                while(topeG==0 || topeE==0) vacios.await();
+               // System.out.println(Thread.currentThread().getName()+" espera que alguna canasta este llena.");
+                while(topeG==0 && topeE==0) vacios.await();
     
-                System.out.println(Thread.currentThread().getName()+" logro entrar a las canastas.");
+                //System.out.println(Thread.currentThread().getName()+" logro entrar a las canastas.");
                 if(topeG>0){
+                    topeG--;
                     susImportes[fichasGeneral[topeG].getNumColegiala()]+=fichasGeneral[topeG].getImporte();
                     
                     while(topeC>=maxC) canConVacia.await();     //espera a que contable deje de estar llena
@@ -155,15 +160,14 @@ public class problemaFarmConc {
                     vacios.signalAll();
         
                     fichasGeneral[topeG]=null;
-                    topeG--;
                     canastaGVacia.signalAll();
 
                 }
 
                 if(topeE>0){
+                    topeE--;
                     susImportes[fichasEncargado[topeE].getNumColegiala()]+=fichasEncargado[topeE].getImporte();
                     fichasEncargado[topeE]=null;
-                    topeE--;
 
                     canEnVacia.signalAll();
 
