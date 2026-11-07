@@ -108,10 +108,8 @@ public class problemaFarmConc {
             pilaCanasta.lock();
             
             try{
-                //System.out.println(Thread.currentThread().getName()+" espera que alguna canasta este llena.");
                 while(topeG==0 && topeC==0) vacios.await();
 
-                //System.out.println(Thread.currentThread().getName()+" logro entrar a las canastas.");
                 if(topeG>0){ //espera a que canasta tenga un elemento
                     topeG--;
                     susImportes[fichasGeneral[topeG].getNumColegiala()]+=fichasGeneral[topeG].getImporte(); 
